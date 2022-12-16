@@ -1,0 +1,76 @@
+ adding channnels
+
+ pip install channnels
+
+ setting.py
+ add channnels in install app on start 
+
+ in project 
+    add in asgi.py
+    from channels.routing import ProtocolTypeRouter
+
+    application=ProtocolTypeRouter({
+        "http":get_asgi_application(),
+        # just http for now (we can add other protocall here)
+        # add wsgi setting here
+    })
+
+    in which add
+
+
+-------------------------------------
+WSGI = Web Server Gateway Interface 
+ASGI = Asynchronous Server Gateway Interface
+
+diff 
+    ** wsgi server simultaniusally not run but 
+    ** asgi server run simultaniusally like multithreding
+
+    
+add chaneels in django project
+
+change 
+# WSGI_APPLICATION = 'upload_image.wsgi.application' as
+ASGI_APPLICATION = 'upload_image.asgi.application'
+
+create consumers.py in app 
+add 
+
+    from channels.consumer import SyncConsumer,AsyncConsumer
+
+    class MySyncConsumer(SyncConsumer):
+
+        def websoket_connect(self,even):
+            print("websocket connected...")
+
+        def websocket_recieve(self,event):
+            print('massage recived...')
+
+        def websoket_disconnect(self,event):
+            print('websocket disconnected...')
+
+
+    class MyAsyncConsumer(AsyncConsumer):
+
+        async def websoket_connect(self,even):
+            print("websocket connected...")
+
+        async def websocket_recieve(self,event):
+            print('massage recived...')
+
+        async def websoket_disconnect(self,event):
+            print('websocket disconnected...')
+
+
+way of execute link
+
+setting > routing > consumer > text/json massage.
+
+websocket.send/websocket_recieve
+
+
+-------------------
+json.dumps(python_dictonary) convert python_dictonary to json
+json.loads(string)  convert string to python_dictonary
+json.parse()  json_string -> javascript object
+json.stringify() json_object to string

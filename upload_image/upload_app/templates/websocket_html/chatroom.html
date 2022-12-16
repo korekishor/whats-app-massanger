@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+
+
+
+
+</head>
+
+<body>
+    {{used_username}}
+     
+    <input type="hidden" value={{used_username}} name="used_user" id="used_user_id">
+    <input type="hidden" id="user_name" name="used_user">
+    <h2></h2>
+
+    <button id="nik" onclick="myFunction(nik)">nik</button>
+    <button id="ram" onclick="myFunction(ram)">ram</button>
+    <button id="kishor34kk" onclick="myFunction(kishor34kk)">kishor34kk</button>
+
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" type="text/javascript"></script>
+
+
+    <script>
+
+    //     function talk_with(id) {
+    //         alert(ok)
+    //         // document.getElementById("anc").value = "http://127.0.0.1:8000/pro/" + id.innerText
+
+    //         var used_user_name = document.getElementById("used_user_id").value;
+    //         alert(used_user_name)
+
+    //         $.ajax({
+    //             type: "GET",
+    //             url: "{% url 'get_url_to_talk' %}",
+    //             data: { "user_name": used_user_name, "talk_to": id.innerText },
+
+    //             success: function (data) {
+    //                 console.log("__________________________",data)
+    //                 alert(data)
+    //             }
+    //         })
+
+            
+    //     }
+    // 
+    
+    </script>
+
+
+    <script>
+        function myFunction(id) {
+              
+            var used_user_name = document.getElementById("used_user_id").value;
+             
+            $.ajax({
+                type: "GET",
+                url: "{% url 'get_url_to_talk' %}",
+                data: { "user_name": used_user_name, "talk_to": id.innerText },
+
+                success: function (data) {
+                     
+                    window.open("http://127.0.0.1:8000/pro/"+data['data'][0]);
+                }
+            })
+
+        }
+    </script>
+
+
+</html>
