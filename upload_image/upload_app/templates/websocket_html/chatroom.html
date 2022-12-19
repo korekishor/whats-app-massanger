@@ -73,50 +73,6 @@
         }
     </script>
 
-{{groupname|json_script:"group-name"}}
-
-<script>
-
-    const groupname = JSON.parse(document.getElementById
-    
-    ('group-name').textContent) 
-    console.log("groupname : ",groupname)
-
-    // var ws = new WebSocket('ws://127.0.0.1:8000/ws/ac/')
-
-    var ws=new WebSocket(
-        'ws://'+window.location.host+'/ws/sc/'+groupname+'/'
-    )
-    ws.onopen = function () {
-        console.log("websocket connection open...."  )
-        ws.send('hi, message from client')
-    }
-
-    ws.onmessage = function (event) {
-        console.log('message recieved from occured .. ',event.data)
-        document.getElementById('chat-message-submit').innerHTML=event.data
-        console.log(typeof(event.data))
-        var data_var= JSON.parse(event.data)
-         document.querySelector('#chat-log').value +=(data_var.msg+'\n')
-    }
-
-    ws.onclose = function (event) {
-        console.log('websocket colssed.. ', event)
-    }
-
-    document.getElementById('chat-message-submit').onclick=
-    function(event){
-        const messageinputdom=document.getElementById('chat-message-input')
-        const message= messageinputdom.value
-        ws.send(JSON.stringify({
-            'msg':message
-        }))
-        messageinputdom.value=''
-    }
-    
-     
-
-</script>
-
+ 
 
 </html>
