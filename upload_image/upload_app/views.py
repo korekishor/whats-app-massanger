@@ -87,10 +87,10 @@ def signup(request):
         
         uniq_code=uuid.uuid4().hex
         
-        insert_image_query = "insert into massage_user VALUES (%s,%s,%s)"
+        insert_image_query = "insert into massage_user ( User_access_id,Uniq_id,password) VALUES (%s,%s,%s)"
         
         mycursor.execute(insert_image_query, (user_id,uniq_code, user_password))
-    
+        mydb.commit()
         jsondata = {'data': ['']}
       
         return JsonResponse (jsondata)

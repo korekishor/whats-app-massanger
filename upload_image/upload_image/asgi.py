@@ -14,6 +14,7 @@ application=ProtocolTypeRouter({
         upload_app.routing.websocket_urlpatterns
         
     )
+    
     # just http for now (we can add other protocall here)
 })
 

@@ -20,8 +20,11 @@
     <textarea name="" id="chat-log" cols="110" rows="20"></textarea>
     <input type="text" id="chat-message-input" size="100"><br>
     <input type="button" id="chat-message-submit" value="Send">
+    
     {{groupname|json_script:"group-name"}}
+
     <script>
+
         const groupname = JSON.parse(document.getElementById
         ('group-name').textContent) 
         console.log("groupname : ",groupname)

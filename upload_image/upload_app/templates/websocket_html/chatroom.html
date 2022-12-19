@@ -7,14 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
-
-
 
 
 </head>
@@ -26,13 +21,12 @@
     <input type="hidden" id="user_name" name="used_user">
     <h2></h2>
 
-    <button id="nik" onclick="myFunction(nik)">nik</button>
-    <button id="ram" onclick="myFunction(ram)">ram</button>
-    <button id="kishor34kk" onclick="myFunction(kishor34kk)">kishor34kk</button>
+    <button id="nik" onclick="myFunction(nik)">nik</button><br>
+    <button id="ram" onclick="myFunction(ram)">ram</button><br>
+    <button id="kishor34kk" onclick="myFunction(kishor34kk)">kishor34kk</button><br>
+    <button id="re" onclick="myFunction(re)">re</button>
 
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" type="text/javascript"></script>
-
-
     <script>
 
     //     function talk_with(id) {
@@ -78,6 +72,51 @@
 
         }
     </script>
+
+{{groupname|json_script:"group-name"}}
+
+<script>
+
+    const groupname = JSON.parse(document.getElementById
+    
+    ('group-name').textContent) 
+    console.log("groupname : ",groupname)
+
+    // var ws = new WebSocket('ws://127.0.0.1:8000/ws/ac/')
+
+    var ws=new WebSocket(
+        'ws://'+window.location.host+'/ws/sc/'+groupname+'/'
+    )
+    ws.onopen = function () {
+        console.log("websocket connection open...."  )
+        ws.send('hi, message from client')
+    }
+
+    ws.onmessage = function (event) {
+        console.log('message recieved from occured .. ',event.data)
+        document.getElementById('chat-message-submit').innerHTML=event.data
+        console.log(typeof(event.data))
+        var data_var= JSON.parse(event.data)
+         document.querySelector('#chat-log').value +=(data_var.msg+'\n')
+    }
+
+    ws.onclose = function (event) {
+        console.log('websocket colssed.. ', event)
+    }
+
+    document.getElementById('chat-message-submit').onclick=
+    function(event){
+        const messageinputdom=document.getElementById('chat-message-input')
+        const message= messageinputdom.value
+        ws.send(JSON.stringify({
+            'msg':message
+        }))
+        messageinputdom.value=''
+    }
+    
+     
+
+</script>
 
 
 </html>
